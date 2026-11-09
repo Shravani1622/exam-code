@@ -1,0 +1,194 @@
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Feedback Form</title>
+</head>
+
+<body>
+
+    <h2>Online Feedback Form</h2>
+
+    <form action="FeedbackServlet" method="post">
+
+        Name:
+        <input type="text" name="name" required>
+        <br><br>
+
+        Email:
+        <input type="email" name="email" required>
+        <br><br>
+
+        Rating:
+        <select name="rating" required>
+            <option value="">Select Rating</option>
+            <option>Excellent</option>
+            <option>Good</option>
+            <option>Average</option>
+            <option>Poor</option>
+        </select>
+        <br><br>
+
+        Comments:
+        <textarea name="comments" rows="4" cols="25" required></textarea>
+        <br><br>
+
+        <input type="submit" value="Submit Feedback">
+
+        <input type="reset" value="Clear">
+
+    </form>
+
+</body>
+</html>
+
+pom.xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mycompany</groupId>
+    <artifactId>OnlineFeedbackForm</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>war</packaging>
+
+    <name>OnlineFeedbackForm</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+
+        <!-- Servlet API for Tomcat 9 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>OnlineFeedbackForm</finalName>
+
+        <plugins>
+
+            <!-- Java Compiler -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <release>17</release>
+                </configuration>
+            </plugin>
+
+            <!-- WAR Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
+
+Feedback Servlet.java
+
+package com.mycompany.onlinefeedbackform;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet("/FeedbackServlet")
+public class FeedbackServlet extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+                          throws ServletException, IOException {
+
+        response.setContentType("text/html");
+
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String rating = request.getParameter("rating");
+        String comments = request.getParameter("comments");
+
+        PrintWriter out = response.getWriter();
+
+        out.println("<html><body>");
+        out.println("<h1>Feedback Submitted Successfully!</h1>");
+
+        out.println("<h3>Name: " + name + "</h3>");
+        out.println("<h3>Email: " + email + "</h3>");
+        out.println("<h3>Rating: " + rating + "</h3>");
+        out.println("<h3>Comments: " + comments + "</h3>");
+
+        out.println("<a href='feedback.html'>Go Back</a>");
+
+        out.println("</body></html>");
+    }
+}
+
+Feedback.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Feedback Form</title>
+</head>
+
+<body>
+
+    <h2>Online Feedback Form</h2>
+
+    <form action="FeedbackServlet" method="post">
+
+        Name:
+        <input type="text" name="name" required>
+        <br><br>
+
+        Email:
+        <input type="email" name="email" required>
+        <br><br>
+
+        Rating:
+        <select name="rating" required>
+            <option value="">Select Rating</option>
+            <option>Excellent</option>
+            <option>Good</option>
+            <option>Average</option>
+            <option>Poor</option>
+        </select>
+        <br><br>
+
+        Comments:
+        <textarea name="comments" rows="4" cols="25" required></textarea>
+        <br><br>
+
+        <input type="submit" value="Submit Feedback">
+
+        <input type="reset" value="Clear">
+
+    </form>
+
+</body>
+</html>

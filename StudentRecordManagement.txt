@@ -1,0 +1,83 @@
+import java.util.*;
+
+class Student
+{
+    int id;
+    String name;
+    double marks;
+    Student(int id,String name, double marks){
+        this.id = id;
+        this.name = name;
+        this.marks = marks;
+    }
+    
+    @Override
+    public String toString() {
+        return "ID:" + id + ",Name: " + name + ", Marks: " + marks;
+    }
+}
+public class StudentManagement {
+        public static void main(String[] args){
+            ArrayList<Student> studentList = new ArrayList<>();
+            HashMap<Integer , Student> StudentMap = new HashMap<>();
+            
+            Student s1 = new Student(101, "Shravani" , 90);
+            Student s2 = new Student(102, "Shrav" , 80);
+            Student s3 = new Student(103, "Mansi" , 70);
+            
+            studentList.add(s1);
+            studentList.add(s2);
+            studentList.add(s3);
+            
+            StudentMap.put(s1.id, s1);
+            StudentMap.put(s2.id, s2);
+            StudentMap.put(s3.id, s3);
+            
+            
+            int searchId = 102;
+            if(StudentMap.containsKey(searchId)) {
+                System.out.println("StudentFound:");
+                System.out.println(StudentMap.get(searchId));
+            }else {
+                System.out.println("Student not found");
+            }
+            int updateId = 103;
+            if(StudentMap.containsKey(updateId)){
+                Student st = StudentMap.get(updateId);
+                st.marks = 95.0;
+                System.out.println("\nUpdated Record:");
+                System.out.println(st);
+            }
+            System.out.println("\nAll StudentRecords:");
+            Iterator <Student> iterator = studentList.iterator();
+            while(iterator.hasNext()) {
+                System.out.println(iterator.next());
+            }
+    }
+}
+
+
+
+
+
+pom.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany</groupId>
+    <artifactId>StudentRecordManagement</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>26</maven.compiler.release>
+        <exec.mainClass>com.mycompany.studentrecordmanagement.StudentRecordManagement</exec.mainClass>
+    </properties>
+</project>
+
+
+
+            
+        
+    
